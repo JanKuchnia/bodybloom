@@ -319,8 +319,8 @@ def hours_rows():
 _k = re.search(r'<section class="py-space-xl" id="kontakt">.*?</section>', index, flags=re.S).group(0)
 _k = _k.replace(' id="kontakt"', "").replace("py-space-xl", "py-space-lg", 1)
 _k = _sub(_k, r'<div class="flex flex-col gap-2 font-body-sm text-body-sm">.*?Zamknięte</span>\s*</div>\s*</div>', hours_rows())
-_k = _sub(_k, r'<h4 class="[^"]*">\s*Godziny otwarcia\s*</h4>',
-          '<div class="flex items-center justify-between gap-2 mb-space-xs"><h4 class="font-label-md text-label-md font-semibold text-on-surface uppercase tracking-wider">Godziny otwarcia</h4>'
+_k = _sub(_k, r'<h3 class="[^"]*">\s*Godziny otwarcia\s*</h3>',
+          '<div class="flex items-center justify-between gap-2 mb-space-xs"><h3 class="font-label-md text-label-md font-semibold text-on-surface uppercase tracking-wider">Godziny otwarcia</h3>'
           '<span id="open-now" hidden class="font-label-sm text-label-sm font-semibold px-3 py-1 rounded-full"></span></div>')
 _k = _sub(_k, r'<p class="font-label-lg text-label-lg font-semibold text-on-surface">ul\. Ignacego',
           '<p class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">BODY BLOOM Studio Treningowe</p><p class="font-label-lg text-label-lg font-semibold text-on-surface">ul. Ignacego')
@@ -352,7 +352,7 @@ def home_grafik():
             h, m = map(int, t.split(":"))
             rows.append(f'<div data-t="{di * 1440 + h * 60 + m}" class="{"" if len(rows) < 3 else "hidden "}bg-surface-container-lowest p-space-md rounded-2xl shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm hover:shadow-md transition-shadow">'
                         f'<div class="flex items-center gap-space-md min-w-0"><div class="bg-surface-container px-3.5 py-2 rounded-xl text-center shrink-0 min-w-28"><span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant block">{day}</span><span class="font-headline-sm text-headline-sm font-bold text-on-surface block tabular-nums">{t}</span></div>'
-                        f'<div class="flex flex-col min-w-0"><h4 class="font-headline-sm text-base sm:text-headline-sm font-semibold text-on-surface">{n}</h4><p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">{who}</p></div></div>'
+                        f'<div class="flex flex-col min-w-0"><h3 class="font-headline-sm text-base sm:text-headline-sm font-semibold text-on-surface">{n}</h3><p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">{who}</p></div></div>'
                         f'<a class="inline-flex items-center justify-center bg-primary text-on-primary font-label-md text-label-md px-5 py-2.5 rounded-full hover:bg-primary-container transition-colors shrink-0" href="tel:{TEL}">Zapisz się</a></div>')
     # shows the next 3 classes from now (Mon=0, minutes of week); without JS the first 3 of the week stay visible
     js = ("<script>(()=>{const l=document.getElementById('grafik-next'),r=[...l.children],d=new Date(),n=((d.getDay()+6)%7)*1440+d.getHours()*60+d.getMinutes();"
