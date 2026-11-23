@@ -26,7 +26,7 @@ def cards(items, cols="md:grid-cols-3"):
     c = "".join(f'<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm flex flex-col gap-2"><div class="w-12 h-12 rounded-xl bg-primary-fixed text-on-primary-fixed flex items-center justify-center"><i data-lucide="{i}" class="w-6 h-6"></i></div><h3 class="font-headline-sm text-headline-sm font-semibold">{t}</h3><p class="font-body-sm text-body-sm text-on-surface-variant">{d}</p></div>' for i, t, d in items)
     return f'<div class="grid grid-cols-1 {cols} gap-gutter">{c}</div>'
 def faq(items):
-    d = "".join(f'<details class="bg-surface-container-lowest rounded-2xl shadow-sm group"><summary class="cursor-pointer list-none flex items-center justify-between gap-3 p-space-md font-headline-sm text-base font-semibold">{q}<i data-lucide="chevron-down" class="w-5 h-5 shrink-0 text-primary"></i></summary><div class="px-space-md pb-space-md font-body-md text-body-md text-on-surface-variant">{a}</div></details>' for q, a in items)
+    d = "".join(f'<details class="bg-surface-container-lowest rounded-2xl shadow-sm group"><summary class="cursor-pointer list-none flex items-center justify-between gap-3 p-space-md font-headline-sm text-base font-semibold">{q}<i data-lucide="chevron-down" class="w-5 h-5 shrink-0 text-primary transition-transform duration-200 group-open:rotate-180"></i></summary><div class="px-space-md pb-space-md font-body-md text-body-md text-on-surface-variant">{a}</div></details>' for q, a in items)
     return f'<div class="flex flex-col gap-space-xs">{d}</div>'
 def table(head, rows, note=None):
     th = "".join(f'<th class="text-left py-2 pr-4 font-label-md uppercase tracking-wider">{h}</th>' for h in head)
