@@ -336,7 +336,10 @@ def head_meta(url, title, desc, ld):
 def with_meta(html, title, meta):
     html = re.sub(r"<!--seo-->.*?<!--/seo-->", "", html, flags=re.S)
     html = re.sub(r"<title>.*?</title>", f"<title>{esc(title)}</title>", html, count=1)
-    return html.replace("</head>", meta + "</head>", 1)
+    # whole site kept out of search engines for now; remove NOINDEX to allow indexing
+    return html.replace("</head>", meta.replace("<!--/seo-->", NOINDEX + "<!--/seo-->", 1) + "</head>", 1)
+
+NOINDEX = '<meta name="robots" content="noindex, nofollow">'
 
 ADDR = {"@type": "PostalAddress", "streetAddress": "ul. Ignacego Daszyńskiego 9", "postalCode": "32-400", "addressLocality": "Myślenice", "addressCountry": "PL"}
 DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -391,7 +394,6 @@ def render(slug, d, depth=1):
             f'<p class="font-body-lg text-body-lg text-on-surface-variant">{d["lead"]}</p>{acts}</div>{pic}</header>')
     html = pre_sub + main_open + '<div class="flex flex-col w-full">' + head + d["body"] + "</div></main>" + post
     html = with_meta(html, d["title"], head_meta(url, d["title"], d["desc"], ld))
-    html = html.replace("<head>", '<head><meta name="robots" content="noindex">', 1) if d.get("noindex") else html
     return relativize(html, depth) if depth is not None else html
 
 for slug, d in PAGES.items():
